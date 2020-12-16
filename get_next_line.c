@@ -6,65 +6,13 @@
 /*   By: addzikow <addzikow@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 15:31:36 by addzikow          #+#    #+#             */
-/*   Updated: 2020/12/15 21:04:12 by addzikow         ###   ########lyon.fr   */
+/*   Updated: 2020/12/16 14:20:59 by addzikow         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "get_next_line.h"
 
-int is_nl(char *save)
-{
-    int         i;
-
-    if (!save)
-        return(0);
-    i = 0;
-    while (save[i])
-    {
-        if (save[i] == '\n')
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
-size_t  ft_strlen(char *str)
-{
-    size_t      i;
-
-    if (!str)
-        return (NULL);
-    while (str[i])
-        i++;
-    return (i);
-}
-
-char *ft_strjoin(char *save, char *buf)
-{
-    size_t      length;
-    char        *str;
-    int         i;
-    int         j;
-
-    length = ft_strlen(save) + ft_strlen(buf);
-    if (!(str = malloc(sizeof(char) * (length + 1))))
-        return (0);
-    i = 0;
-    j = 0;
-    while (save[j])
-        str[i++] = save[j++];
-    j = 0;
-    while (buf[j])
-        str[i++] = buf[j++];
-    str[i] = '\0';
-    free(save);
-    return (str);
-}
-
-
-char *get_buf_save(char *save)
+char    *get_buf_save(char *save)
 {
     char        *str;
     int         i;
@@ -91,7 +39,7 @@ char *get_buf_save(char *save)
     return(str);
 }
 
-char *get_line(char *save)
+char    *get_line(char *save)
 {
     char        *str;
     int         i;
@@ -99,12 +47,12 @@ char *get_line(char *save)
     if (!save)
         return (NULL);
     i = 0;
-    while (save[i] && save[i] != '\n')
+    while (save && save[i] != '\n')
         i++;
     if(!(str = malloc(sizeof(char) * (i + 1))))
         return (NULL);
     i = 0;
-    while (save[i] && save[i] != '\n')
+    while (save && save[i] != '\n')
     {
         str[i] = save[i];
         i++;
@@ -113,13 +61,13 @@ char *get_line(char *save)
     return (str);   
 }
 
-int get_next_line(int fd, char **line)
+int     get_next_line(int fd, char **line)
 {
     int         ret;
     char        *buf;
     static char *buf_save;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || !line)
         return (-1);
     if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
         return (-1);
@@ -141,21 +89,4 @@ int get_next_line(int fd, char **line)
     if (ret == 0)
         return (0);
     return (1);
-}
-
-#include <stdio.h>
-
-int main (void)
-{
-    char *line;
-    int fd;
-    
-    fd = open("42", O_RDONLY);
-
-    get_next_line(fd, &line);
-    printf("%s\n", line);
-    
-    get_next_line(fd, &line);
-    printf("%s\n", line);
-
 }
