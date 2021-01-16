@@ -3,7 +3,7 @@
 
 int main (int argc, char **argv)
 {
-    char *line;
+    char *line=NULL;
     int fd;
     int nb;
     
@@ -23,4 +23,13 @@ int main (int argc, char **argv)
     nb = get_next_line(fd, &line);
     printf("%s\n", line);
     printf("%d\n", nb);
+
+    // fd = open("test", O_RDONLY);
+    // nb = get_next_line(fd, &line);
+    // if (line)
+    //     printf("YES\n");
+    // else
+    //     printf("FUCK\n");
+    // printf("%d\n", nb);
+    // free(line);
 }

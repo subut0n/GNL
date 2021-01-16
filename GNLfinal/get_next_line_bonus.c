@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: addzikow <addzikow@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:34:34 by addzikow          #+#    #+#             */
-/*   Updated: 2021/01/16 16:41:03 by addzikow         ###   ########lyon.fr   */
+/*   Updated: 2021/01/16 16:41:09 by addzikow         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_buf_save(char *buf_save)
 int	get_next_line(int fd, char **line)
 {
 	char		*buf;
-	static char	*buf_save;
+	static char	*buf_save[10240];
 	int			ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
@@ -76,7 +76,7 @@ int	get_next_line(int fd, char **line)
 	if (!(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
 	ret = 1;
-	while (!is_nl(buf_save) && (ret = read(fd, buf, BUFFER_SIZE)) != 0)
+	while (!is_nl(buf_save[fd]) && (ret = read(fd, buf, BUFFER_SIZE)) != 0)
 	{
 		if (ret == -1)
 		{
@@ -84,11 +84,11 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buf[ret] = '\0';
-		buf_save = cat_buf(buf_save, buf);
+		buf_save[fd] = cat_buf(buf_save[fd], buf);
 	}
 	free(buf);
-	*line = get_line(buf_save);
-	buf_save = get_buf_save(buf_save);
+	*line = get_line(buf_save[fd]);
+	buf_save[fd] = get_buf_save(buf_save[fd]);
 	if (ret == 0)
 		return (0);
 	return (1);

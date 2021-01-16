@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: addzikow <addzikow@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 14:52:33 by addzikow          #+#    #+#             */
-/*   Updated: 2021/01/16 16:35:45 by addzikow         ###   ########lyon.fr   */
+/*   Created: 2020/12/16 12:17:28 by addzikow          #+#    #+#             */
+/*   Updated: 2020/12/16 12:28:20 by addzikow         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 # define GET_NEXT_LINE_H
 
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/stat.h>
 
-int is_nl(char *buf_save);
+int     is_nl(char *save);
 size_t  ft_strlen(char *str);
-char    *cat_buf(char *buf_save, char *buf);
-char    *get_line(char *buf_save);
-char    *get_buf_save(char *buf_save);
-int get_next_line(int fd, char **line);
+char    *ft_strjoin(char *save, char *buf);
+char    *get_buf_save(char *save);
+char    *get_line(char *save);
+int     get_next_line(int fd, char **line);
 
 #endif

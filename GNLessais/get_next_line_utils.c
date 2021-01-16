@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: addzikow <addzikow@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/05 14:49:15 by addzikow          #+#    #+#             */
-/*   Updated: 2021/01/16 16:41:13 by addzikow         ###   ########lyon.fr   */
+/*   Created: 2020/12/16 12:17:40 by addzikow          #+#    #+#             */
+/*   Updated: 2020/12/16 12:28:10 by addzikow         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int is_nl(char *buf_save)
+int     is_nl(char *save)
 {
-    int i;
+    int         i;
 
-    i = 0;
-    if (!buf_save)
+    if (!save)
         return(0);
-    while (buf_save[i] != '\0')
+    i = 0;
+    while (save[i])
     {
-        if (buf_save[i] == '\n')
+        if (save[i] == '\n')
             return (1);
         i++;
     }
@@ -30,39 +30,34 @@ int is_nl(char *buf_save)
 
 size_t  ft_strlen(char *str)
 {
-    size_t i;
+    size_t      i;
 
     i = 0;
     if (!str)
-        return(0);
+        return (0);
     while (str[i])
         i++;
-    return(i);
+    return (i);
 }
 
-char    *cat_buf(char *buf_save, char *buf)
+char    *ft_strjoin(char *save, char *buf)
 {
-    char *str;
-    size_t i;
-    size_t j;
-    size_t length;
+    size_t      length;
+    char        *str;
+    int         i;
+    int         j;
 
+    length = ft_strlen(save) + ft_strlen(buf);
+    if (!(str = malloc(sizeof(char) * (length + 1))))
+        return (0);
     i = 0;
-    length = ft_strlen(buf_save) + ft_strlen(buf);
-    if (!(str = malloc(sizeof(char) *(length + 1))))
-        return (NULL);
-    if (buf_save)
-    {    
-        while (buf_save[i] != '\0')
-        {
-            str[i] = buf_save[i];
-            i++;
-        }
-    }
     j = 0;
-    while (buf && buf[j] != '\0')
+    while (save && save[j])
+        str[i++] = save[j++];
+    j = 0;
+    while (buf && buf[j])
         str[i++] = buf[j++];
     str[i] = '\0';
-    free(buf_save);
+    free(save);
     return (str);
 }
