@@ -6,7 +6,7 @@
 /*   By: addzikow <addzikow@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 14:34:34 by addzikow          #+#    #+#             */
-/*   Updated: 2021/01/16 16:41:09 by addzikow         ###   ########lyon.fr   */
+/*   Updated: 2021/01/16 16:56:35 by addzikow         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*get_buf_save(char *buf_save)
 	return (str);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	char		*buf;
 	static char	*buf_save[10240];

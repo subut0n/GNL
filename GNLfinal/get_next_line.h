@@ -6,7 +6,7 @@
 /*   By: addzikow <addzikow@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 14:52:33 by addzikow          #+#    #+#             */
-/*   Updated: 2021/01/16 16:35:45 by addzikow         ###   ########lyon.fr   */
+/*   Updated: 2021/01/16 16:56:06 by addzikow         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include <unistd.h>
 # include <sys/stat.h>
 
-int is_nl(char *buf_save);
-size_t  ft_strlen(char *str);
-char    *cat_buf(char *buf_save, char *buf);
-char    *get_line(char *buf_save);
-char    *get_buf_save(char *buf_save);
-int get_next_line(int fd, char **line);
+int		is_nl(char *buf_save);
+size_t	ft_strlen(char *str);
+char	*cat_buf(char *buf_save, char *buf);
+char	*get_line(char *buf_save);
+char	*get_buf_save(char *buf_save);
+int		get_next_line(int fd, char **line);
 
 #endif
